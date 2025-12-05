@@ -1,7 +1,9 @@
 import argparse
-import pathlib
+from pathlib import Path
+from typing import TextIO
 
-def parse_rotations(rotations_file):
+
+def parse_rotations(rotations_file: TextIO) -> list[int]:
     rotations = []
     for r in rotations_file:
         match r[0]:
@@ -12,14 +14,7 @@ def parse_rotations(rotations_file):
     return rotations
 
 
-def main(rotations_file, start, method):
-    with open(rotations_file, "r") as f:
-        rotations = parse_rotations(f)
-    zeros = method_one(rotations, start) if method == 1 else method_two(rotations, start)
-    print(zeros)
-
-
-def method_one(rotations, start):
+def method_one(rotations: list[int], start: int) -> int:
     current = start
     zeros = 0
     for r in rotations:
@@ -28,7 +23,7 @@ def method_one(rotations, start):
     return zeros
 
 
-def method_two(rotations, start):
+def method_two(rotations: list[int], start: int) -> int:
     current = start
     zeros = 0
     for r in rotations:
@@ -48,9 +43,17 @@ def method_two(rotations, start):
 
     return zeros
 
+
+def main(rotations_file: Path, start: int, method: int):
+    with open(rotations_file, "r") as f:
+        rotations = parse_rotations(f)
+    zeros = method_one(rotations, start) if method == 1 else method_two(rotations, start)
+    print(zeros)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", "-i", type=pathlib.Path)
+    parser.add_argument("--input", "-i", type=Path)
     parser.add_argument("--start", "-s", type=int, default=50)
     parser.add_argument("--method", "-m", type=int, default=1)
     args = parser.parse_args()

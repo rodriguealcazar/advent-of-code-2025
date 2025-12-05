@@ -2,7 +2,7 @@ from io import StringIO
 
 import pytest
 
-from day01.solution import main, method_one, method_two, parse_rotations
+from day01.solution import method_one, method_two, parse_rotations
 
 
 @pytest.fixture
