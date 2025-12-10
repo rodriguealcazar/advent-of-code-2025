@@ -27,7 +27,8 @@ def input_text() -> StringIO:
 8
 11
 17
-32""")
+32"""
+    )
 
 
 def test_parsing(input_text, ranges, ids):

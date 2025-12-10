@@ -46,7 +46,9 @@ def accessible_rolls_in_line(diagram: list[str], line: int) -> str:
 def accessible_rolls(diagram: list[str]) -> int:
     accessible = 0
     for i in range(len(diagram)):
-        accessible += len(list(filter(lambda x: x == "x", accessible_rolls_in_line(diagram, i))))
+        accessible += len(
+            list(filter(lambda x: x == "x", accessible_rolls_in_line(diagram, i)))
+        )
     return accessible
 
 

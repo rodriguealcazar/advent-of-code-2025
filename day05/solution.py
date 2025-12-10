@@ -10,11 +10,11 @@ def parsed_range(db_range: str) -> tuple[int]:
 
 def parse(text: TextIO) -> tuple[list[tuple[int]], list[int]]:
     ranges = []
-    while (l := text.readline().strip()):
+    while l := text.readline().strip():
         ranges.append(parsed_range(l))
 
     ids = []
-    while (l := text.readline().strip()):
+    while l := text.readline().strip():
         ids.append(int(l))
 
     return ranges, ids

@@ -8,10 +8,11 @@ from day06.solution import parse, problem_result
 @pytest.fixture
 def test_input() -> StringIO:
     return StringIO(
-"""123 328  51 64 
+        """123 328  51 64
  45 64  387 23 
   6 98  215 314
-*   +   *   + """)
+*   +   *   + """
+    )
 
 
 @pytest.fixture

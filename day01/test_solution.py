@@ -11,18 +11,9 @@ def rotations() -> list[int]:
 
 
 def test_parsing():
-    rotations = StringIO("\n".join([
-        "L68",
-        "L30",
-        "R48",
-        "L5",
-        "R60",
-        "L55",
-        "L1",
-        "L99",
-        "R14",
-        "L82"
-    ]))
+    rotations = StringIO(
+        "\n".join(["L68", "L30", "R48", "L5", "R60", "L55", "L1", "L99", "R14", "L82"])
+    )
     assert parse_rotations(rotations) == [-68, -30, 48, -5, 60, -55, -1, -99, 14, -82]
 
 

@@ -37,8 +37,8 @@ def method_two(rotations: list[int], start: int) -> int:
         elif target < 0 and current > 0:
             zeros += 1
         elif target >= 100:
-            zeros += 1 
-        
+            zeros += 1
+
         current = target % 100
 
     return zeros
@@ -47,7 +47,9 @@ def method_two(rotations: list[int], start: int) -> int:
 def main(rotations_file: Path, start: int, method: int):
     with open(rotations_file, "r") as f:
         rotations = parse_rotations(f)
-    zeros = method_one(rotations, start) if method == 1 else method_two(rotations, start)
+    zeros = (
+        method_one(rotations, start) if method == 1 else method_two(rotations, start)
+    )
     print(zeros)
 
 

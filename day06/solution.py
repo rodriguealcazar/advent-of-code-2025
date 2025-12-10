@@ -40,7 +40,6 @@ def main(problems_input: Path):
         problems, operators = parse(f)
     print(sum([problem_result(p, o) for p, o in zip(problems, operators)]))
 
-        
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
