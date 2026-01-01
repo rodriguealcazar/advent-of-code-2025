@@ -31,16 +31,47 @@ def fresh_available_count(ranges: list[tuple[int, int]], ids: list[int]) -> list
     return [id for id in ids if is_fresh(ranges, id)]
 
 
-def main(input_path: Path):
+def fresh_ids_count(ranges: list[tuple[int, int]]) -> int:
+    ranges = merged_ranges(ranges)
+    return sum([(r[1] - r[0] + 1) for r in ranges])
+
+
+def merged_ranges(ranges: list[tuple[int, int]]) -> list[tuple[int, int]]:
+    def range_start(r: tuple[int, int]) -> int:
+        return r[0]
+
+    ranges = sorted(ranges, key=range_start)
+
+    merged_ranges = []
+    last_left = 0
+    last_right = 0
+    for r in ranges:
+        if r[0] > last_right:
+            merged_ranges.append(r)
+            last_left = r[0]
+            last_right = r[1]
+            continue
+        if r[0] <= last_right:
+            last_right = max(last_right, r[1])
+            merged_ranges[-1] = (last_left, last_right)
+            continue
+    return merged_ranges
+
+
+def main(input_path: Path, part: int):
     with open(input_path, "r") as f:
         ranges, ids = parse(f)
 
-    print(len(fresh_available(ranges, ids)))
+    if part == 1:
+        print(len(fresh_available_count(ranges, ids)))
+    else:
+        print(fresh_ids_count(ranges))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", "-i", type=Path)
+    parser.add_argument("--part", "-p", type=int, default=1)
     args = parser.parse_args()
 
-    main(args.input)
+    main(args.input, args.part)
