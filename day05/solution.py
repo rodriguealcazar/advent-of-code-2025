@@ -3,12 +3,12 @@ from pathlib import Path
 from typing import TextIO
 
 
-def parsed_range(db_range: str) -> tuple[int]:
+def parsed_range(db_range: str) -> tuple[int, int]:
     start, end = db_range.split("-")
     return (int(start), int(end))
 
 
-def parse(text: TextIO) -> tuple[list[tuple[int]], list[int]]:
+def parse(text: TextIO) -> tuple[list[tuple[int, int]], list[int]]:
     ranges = []
     while l := text.readline().strip():
         ranges.append(parsed_range(l))
@@ -20,14 +20,14 @@ def parse(text: TextIO) -> tuple[list[tuple[int]], list[int]]:
     return ranges, ids
 
 
-def is_fresh(fresh_ids: list[tuple[int]], ingredient_id: int) -> bool:
+def is_fresh(fresh_ids: list[tuple[int, int]], ingredient_id: int) -> bool:
     for id_range in fresh_ids:
         if ingredient_id >= id_range[0] and ingredient_id <= id_range[1]:
             return True
     return False
 
 
-def fresh_available(ranges, ids) -> list[int]:
+def fresh_available_count(ranges: list[tuple[int, int]], ids: list[int]) -> list[int]:
     return [id for id in ids if is_fresh(ranges, id)]
 
 

@@ -5,7 +5,7 @@ from day05.solution import is_fresh, parse, parsed_range
 
 
 @pytest.fixture
-def ranges() -> list[tuple[int]]:
+def ranges() -> list[tuple[int, int]]:
     return [(3, 5), (10, 14), (16, 20), (12, 18)]
 
 
